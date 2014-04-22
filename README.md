@@ -69,13 +69,11 @@ This should prove that you can build golang qml apps.<br>
 Step 5)(2 seconds)<br>
 Install goqmlsnowloadcount<br>
 cd /home/phablet/goqmlstuff<br>
-wget http://adequatech.ca/goqmlsnowloadcount15Apr2014.tar.gz<br>
-gunzip goqmlsnowloadcount15Apr2014.tar.gz <br>
-tar xvf goqmlsnowloadcount15Apr2014.tar <br>
+go get github.com/omac777/goqmlsnowloadcount
 <br>
 Step 6)(3 seconds)<br>
 Build goqmlsnowloadcount<br>
-cd /home/phablet/goqmlstuff/goqmlsnowloadcount<br>
+cd /home/phablet/goqmlstuff/src/github.com/omac777/goqmlsnowloadcount<br>
 go build<br>
 <br>
 Step 7)(2 seconds)<br>
