@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=test
+Icon=properties
+Name=Test
+X-Ubuntu-Touch=true
+X-Ubuntu-StageHint=SideStage
+
+# Save this under:
+#
+# /home/phablet/.local/share/applications/test.desktop
