@@ -31,8 +31,8 @@ Tab {
             }
             TextField {
                 objectName: "guardShiftInfo_GuardLicenseNumberEntry"
-                    id: guardShiftInfo_GuardLicenseNumberEntry
-                    text: i18n.tr("")
+                id: guardShiftInfo_GuardLicenseNumberEntry
+                text: i18n.tr("")
             }            
             Label {//row 3
                 objectName: "guardShiftInfo_ShiftCommentsLabel"
@@ -41,8 +41,8 @@ Tab {
             }
             TextField {
                 objectName: "guardShiftInfo_ShiftCommentsEntry"
-                    id: guardShiftInfo_ShiftCommentsEntry
-                    text: i18n.tr("")
+                id: guardShiftInfo_ShiftCommentsEntry
+                text: i18n.tr("")
             }
             Button {//row4
                 objectName: "guardShiftInfo_PrevButton"
@@ -56,14 +56,17 @@ Tab {
             }
             Button {
                 objectName: "guardShiftInfo_NextButton"
-                    id: guardShiftInfo_NextButton
-                    text: i18n.tr("Next")
-                    onClicked: {
-		    ctrl.guardShiftInfoNextButtonClickedGo(guardShiftInfo_NextButton)
-                        tabs.selectedTabIndex = tabs.selectedTabIndex + 1
-                        console.log("clicked next..." + tabs.selectedTabIndex);
-                    }
-           }
+                id: guardShiftInfo_NextButton
+                text: i18n.tr("Next")
+                onClicked: {
+		    //ctrl.guardShiftInfoNextButtonClickedGo(guardShiftInfo_NextButton)
+		    ctrl.guardShiftInfoSNLDBSetGuardNameGo(guardShiftInfo_GuardNameEntry)
+		    ctrl.guardShiftInfoSNLDBSetLicenseNumberGo(guardShiftInfo_GuardLicenseNumberEntry)
+		    ctrl.guardShiftInfoSNLDBSetShiftCommentGo(guardShiftInfo_ShiftCommentsEntry)
+                    tabs.selectedTabIndex = tabs.selectedTabIndex + 1
+                    console.log("clicked next..." + tabs.selectedTabIndex);
+                }
+            }
         }
     }
 }

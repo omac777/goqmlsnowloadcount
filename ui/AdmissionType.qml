@@ -33,7 +33,8 @@ Tab {
                 id: admissionType_NextButton
                 text: i18n.tr("Next")
                 onClicked: {
-		    ctrl.admissionTypeNextButtonClickedGo(admissionType_NextButton)
+		    //ctrl.admissionTypeNextButtonClickedGo(admissionType_NextButton)
+		    ctrl.admissionTypeNextButtonClickedGo(countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex])
 		    console.log("selected:" + countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex]);
                     tabs.selectedTabIndex = tabs.selectedTabIndex + 1
                     console.log("clicked next..." + tabs.selectedTabIndex);

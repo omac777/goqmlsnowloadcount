@@ -14,7 +14,8 @@ Tab {
             columns :1
             rows: 2
             Label { //row1
-                text: "Shift Start Time: " + Qt.formatTime(guardShiftStartTime_ShiftStartTimePicker.date, "hh:mm:ss")
+	        id: guardShiftStartTime_label
+                text: Qt.formatTime(guardShiftStartTime_ShiftStartTimePicker.date, "hh:mm:ss")
                 width: parent.width
             }
             DatePicker { //row2
@@ -51,7 +52,7 @@ Tab {
                 id: guardShiftStartTime_NextButton
                 text: i18n.tr("Next")
                 onClicked: {
-                    ctrl.guardShiftStartTimeNextButtonClickedGo(guardShiftStartTime_NextButton)
+                    ctrl.guardShiftStartTimeNextButtonClickedGo(guardShiftStartTime_label)
                     tabs.selectedTabIndex = tabs.selectedTabIndex + 1
                     console.log("clicked next..." + tabs.selectedTabIndex);
                 }

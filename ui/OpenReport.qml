@@ -18,11 +18,12 @@ Tab {
                     id: openReport_OpenReportButton
                     text: i18n.tr("Open Report")
 		onClicked: {
-                        ctrl.openReportOpenReportButtonClickedGo(openReport_OpenReportButton)
+                        ctrl.openReportOpenReportButtonClickedGo(openReport_FileNameEntry)
 		}
             }
             TextField {
                     objectName: "openReport_FileNameEntry"
+		    id: openReport_FileNameEntry
                     text: i18n.tr("")
                     width: parent.width - openReport_OpenReportButton.width
             }

@@ -39,7 +39,8 @@ Tab {
                 id: guardLocation_NextButton
                 text: i18n.tr("Next")
                 onClicked: {
-		    ctrl.guardLocationNextButtonClickedGo(guardLocation_NextButton)
+		    //ctrl.guardLocationNextButtonClickedGo(guardLocation_NextButton)
+		    ctrl.guardLocationNextButtonClickedGo(countingAtLocationSelector.model[countingAtLocationSelector.selectedIndex])
 		    console.log("selected:" + countingAtLocationSelector.model[countingAtLocationSelector.selectedIndex]);
                     tabs.selectedTabIndex = tabs.selectedTabIndex + 1
                     console.log("clicked next..." + tabs.selectedTabIndex);

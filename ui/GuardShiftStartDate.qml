@@ -17,7 +17,7 @@ Tab {
 
             Label {
                 id: guardShiftStartDate_ShiftDateLabel
-                text: "Shift Start Date: " + Qt.formatDate(guardShiftStartDate_ShiftStartDatePicker.date, "dd-MMM-yyyy")
+                text: Qt.formatDate(guardShiftStartDate_ShiftStartDatePicker.date, "dd-MMM-yyyy")
                 width: parent.width
             }
 
@@ -54,7 +54,7 @@ Tab {
                     id: guardShiftStartDate_NextButton
                     text: i18n.tr("Next")
                     onClicked: {
-			ctrl.guardShiftStartDateNextButtonClickedGo(guardShiftStartDate_NextButton)
+			ctrl.guardShiftStartDateNextButtonClickedGo(guardShiftStartDate_ShiftDateLabel)
                         tabs.selectedTabIndex = tabs.selectedTabIndex + 1
                         console.log("clicked next..." + tabs.selectedTabIndex);
                     }
