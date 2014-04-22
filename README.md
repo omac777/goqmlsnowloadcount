@@ -78,8 +78,8 @@ go build<br>
 <br>
 Step 7)(2 seconds)<br>
 Run goqmlsnowloadcount<br>
-cd /home/phablet/.local/share/applications<br>
-wget https://niemeyer.s3.amazonaws.com/test.desktop<br>
+cd /home/phablet/goqmlstuff/src/github.com/omac777/goqmlsnowloadcount<br>
+cp /home/phablet/goqmlstuff/src/github.com/omac777/goqmlsnowloadcount/test.desktop /home/phablet/.local/share/applications/test.desktop<br>
 APP_ID=goqmlsnowloadcount ./goqmlsnowloadcount --desktop_file_hint=/home/phablet/.local/share/applications/test.desktop<br>
 <br>
 Step 8)<br>
