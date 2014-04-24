@@ -430,12 +430,39 @@ func (ctrl *Control) AdmissionTypeNextButtonClickedGo(theString string) {
 	ctrl.Snldb.setCountForItemType(theString);
 }
 
+
+func (ctrl *Control) TruckTypeSingleAxleClickedGo(TruckType_SingleAxleLabel qml.Object) {
+        fmt.Println("in TruckTypeSingleAxleClickedGo:")
+	ctrl.Snldb.singleAxleArrived();
+}
+
+func (ctrl *Control) TruckTypeTandemAxleClickedGo(TruckType_TandemAxleLabel qml.Object) {
+        fmt.Println("in TruckTypeTandemAxleClickedGo:")
+	ctrl.Snldb.tandemAxleArrived();
+}
+
+func (ctrl *Control) TruckTypeTripleAxleClickedGo(TruckType_TripleAxleLabel qml.Object) {
+        fmt.Println("in TruckTypeTripleAxleClickedGo:")
+	ctrl.Snldb.tripleAxleArrived();
+}
+
+func (ctrl *Control) TruckTypeComboAxleClickedGo(TruckType_ComboAxleLabel qml.Object) {
+        fmt.Println("in TruckTypeComboAxleClickedGo:")
+	ctrl.Snldb.comboTruckArrived();
+}
+
+func (ctrl *Control) TruckTypeSemiAxleClickedGo(TruckType_SemiAxleLabel qml.Object) {
+        fmt.Println("in TruckTypeSemiAxleClickedGo:")
+	ctrl.Snldb.semiTrailerArrived();
+}
+
 func (ctrl *Control) TruckTypePreviousButtonClickedGo(theQmlObject qml.Object) {
         fmt.Println("in TruckTypePreviousButtonClickedGo:")
 }
 
 func (ctrl *Control) TruckTypeFinishButtonClickedGo(theQmlObject qml.Object) {
         fmt.Println("in TruckTypeFinishButtonClickedGo:")
+	ctrl.saveJsonFileSNLDB(ctrl.generateUniqueReportFilename(), ctrl.Snldb)
 }
 
 func (ctrl *Control) loadReportDataIntoGui() {
