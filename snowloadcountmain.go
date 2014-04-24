@@ -10,7 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"encoding/json"
-	//"strconv"
+	"strconv"
 	"bytes"
 )
 
@@ -276,6 +276,11 @@ func run() error {
         ctrl := Control{
 		Messagetf1:"tf1inithey",
 		Messagebt1:"bt1inithey",
+		SingleAxleMessage:"0",
+		TandemAxleMessage:"0",
+		TripleAxleMessage:"0",
+		ComboAxleMessage:"0",
+		SemiAxleMessage:"0",
 		IsLoadedReport:false,
 		LoadedReportFilename:"",
 		Snldb:NewSNLDB()}
@@ -292,6 +297,11 @@ type Control struct {
         Root    qml.Object
         Messagebt1 string
         Messagetf1 string
+	SingleAxleMessage string
+	TandemAxleMessage string
+	TripleAxleMessage string
+	ComboAxleMessage string
+	SemiAxleMessage string
         //all the stuff in gotype could be here
         //to facilitate the setting/getting
 	IsLoadedReport bool
@@ -434,26 +444,46 @@ func (ctrl *Control) AdmissionTypeNextButtonClickedGo(theString string) {
 func (ctrl *Control) TruckTypeSingleAxleClickedGo(TruckType_SingleAxleLabel qml.Object) {
         fmt.Println("in TruckTypeSingleAxleClickedGo:")
 	ctrl.Snldb.singleAxleArrived();
+        go func() {
+		ctrl.SingleAxleMessage = strconv.Itoa( ctrl.Snldb.getSingleAxleTotal() )
+		qml.Changed(ctrl, &ctrl.SingleAxleMessage)
+        }()
 }
 
 func (ctrl *Control) TruckTypeTandemAxleClickedGo(TruckType_TandemAxleLabel qml.Object) {
         fmt.Println("in TruckTypeTandemAxleClickedGo:")
 	ctrl.Snldb.tandemAxleArrived();
+        go func() {
+		ctrl.TandemAxleMessage = strconv.Itoa( ctrl.Snldb.getTandemAxleTotal() )
+		qml.Changed(ctrl, &ctrl.TandemAxleMessage)
+        }()
 }
 
 func (ctrl *Control) TruckTypeTripleAxleClickedGo(TruckType_TripleAxleLabel qml.Object) {
         fmt.Println("in TruckTypeTripleAxleClickedGo:")
 	ctrl.Snldb.tripleAxleArrived();
+        go func() {
+		ctrl.TripleAxleMessage = strconv.Itoa( ctrl.Snldb.getTripleAxleTotal() )
+		qml.Changed(ctrl, &ctrl.TripleAxleMessage)
+        }()
 }
 
 func (ctrl *Control) TruckTypeComboAxleClickedGo(TruckType_ComboAxleLabel qml.Object) {
         fmt.Println("in TruckTypeComboAxleClickedGo:")
 	ctrl.Snldb.comboTruckArrived();
+        go func() {
+		ctrl.ComboAxleMessage = strconv.Itoa( ctrl.Snldb.getComboTruckTotal() )
+		qml.Changed(ctrl, &ctrl.ComboAxleMessage)
+        }()
 }
 
 func (ctrl *Control) TruckTypeSemiAxleClickedGo(TruckType_SemiAxleLabel qml.Object) {
         fmt.Println("in TruckTypeSemiAxleClickedGo:")
 	ctrl.Snldb.semiTrailerArrived();
+        go func() {
+		ctrl.SemiAxleMessage = strconv.Itoa( ctrl.Snldb.getSemiTrailerTotal() )
+		qml.Changed(ctrl, &ctrl.SemiAxleMessage)
+        }()
 }
 
 func (ctrl *Control) TruckTypePreviousButtonClickedGo(theQmlObject qml.Object) {
