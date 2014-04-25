@@ -4,8 +4,7 @@ In this example we will use the recipe to demonstrate <br>
 running goqmlsnowloadcount, an Ubuntu Touch wizard-gui <br>
 with next/previous/finish buttons <br>
 that uses Ubuntu touch tab components. <br>
-The golang backend in goqmlsnowloadcount currently does nothing <br>
-except generate log messages as a proof of concept.<br>
+The golang backend in goqmlsnowloadcount is still a work in progress.<br>
 <br>
 Step 1)(15-20 minutes)<br>
 Flash your Google Nexus 4 phone with the latest android firmware.<br>
