@@ -396,13 +396,6 @@ func (ctrl *Control) GuardShiftInfoPreviousButtonClickedGo(theQmlObject qml.Obje
         fmt.Println("in GuardShiftInfoPreviousButtonClickedGo:")
 }
 
-// func (ctrl *Control) GuardShiftInfoNextButtonClickedGo(theQmlObject qml.Object) {
-//         fmt.Println("in GuardShiftInfoNextButtonClickedGo:")
-// 	ctrl.Snldb.setGuardName(sa.guardNameEntry.GetText());
-// 	ctrl.Snldb.setLicenseNumber(sa.guardLicenceNumberEntry.GetText());
-// 	ctrl.Snldb.setShiftComment(sa.guardShiftCommentsEntry.GetText());
-// }
-//GuardShiftInfoSNLDBSetGuardNameGo
 func (ctrl *Control) GuardShiftInfoSNLDBSetGuardNameGo(theQmlObject qml.Object) {
         fmt.Println("in GuardShiftInfoNextButtonClickedGo:")
 	//guardShiftInfo_GuardNameEntry
@@ -496,42 +489,106 @@ func (ctrl *Control) TruckTypeFinishButtonClickedGo(theQmlObject qml.Object) {
 }
 
 func (ctrl *Control) loadReportDataIntoGui() {
-// 	sa.shiftStartTimeEntry.SetText(ctrl.Snldb.getShiftStartTime())
-// 	sa.shiftEndTimeEntry.SetText(ctrl.Snldb.getShiftEndTime())
-// 	sa.shiftStartDateEntry.SetText(ctrl.Snldb.getShiftStartDate())
-// 	sa.guardNameEntry.SetText(ctrl.Snldb.getGuardName())
-// 	sa.guardLicenceNumberEntry.SetText(ctrl.Snldb.getLicenseNumber())
-// 	sa.guardShiftCommentsEntry.SetText(ctrl.Snldb.getShiftComment())
-// 	sa.setActiveCountLocation(ctrl.Snldb.getCountLocation())
-// 	sa.setActiveCountForItemType(ctrl.Snldb.getCountForItemType())
-// 	sa.SingleLabel.SetText(strconv.Itoa(ctrl.Snldb.getSingleAxleTotal()))
-// 	sa.TandemLabel.SetText(strconv.Itoa(ctrl.Snldb.getTandemAxleTotal()))
-// 	sa.TripleLabel.SetText(strconv.Itoa(ctrl.Snldb.getTripleAxleTotal()))
-// 	sa.ComboLabel.SetText(strconv.Itoa(ctrl.Snldb.getComboTruckTotal()))
-// 	sa.SemiLabel.SetText(strconv.Itoa(ctrl.Snldb.getSemiTrailerTotal()))
+        //taken from the go-qml particle example 
+        //important qml object navigation stuff
+        //1)get the qml object class factory with id "emitterComponent"
+	//component := ctrl.Root.Object("emitterComponent")
+        
+        //2)create an object instance of it
+	//emitter := component.Create(nil)
+        
+        //3)set the property "x" with that object        
+        //emitter.Set("x", x)
 
-// 	// disable all the fields after filling them/changing them while in loaded report mode.
-// 	sa.shiftStartTimeEntry.SetSensitive(false)
-// 	sa.shiftEndTimeEntry.SetSensitive(false)
-// 	sa.shiftStartDateEntry.SetSensitive(false)
-// 	sa.guardNameEntry.SetSensitive(false)
-// 	sa.guardLicenceNumberEntry.SetSensitive(false)
-// 	sa.guardShiftCommentsEntry.SetSensitive(false)
-	
-// 	sa.conroyRadio.SetSensitive(false)
-// 	sa.michaelRadio.SetSensitive(false)
-// 	sa.strandherdRadio.SetSensitive(false)
-// 	sa.innesRadio.SetSensitive(false)
-// 	sa.clydeRadio.SetSensitive(false)
-	
-// 	sa.passesRadio.SetSensitive(false)
-// 	sa.ticketsRadio.SetSensitive(false)
+        //4)get the objectinstance "xAnim", then call its function named "start"
+	//emitter.ObjectByName("xAnim").Call("start")
 
-// 	sa.singleaxlebutton.SetSensitive(false)
-// 	sa.tandemaxlebutton.SetSensitive(false)
-// 	sa.tripleaxlebutton.SetSensitive(false)
-// 	sa.combotruckbutton.SetSensitive(false)
-// 	sa.semitrailerbutton.SetSensitive(false)
+	//sa.shiftStartTimeEntry.SetText(ctrl.Snldb.getShiftStartTime())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftStartTime_ShiftStartTimePicker
+
+	//sa.shiftEndTimeEntry.SetText(ctrl.Snldb.getShiftEndTime())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftEndTime_ShiftEndTimePicker
+
+	//sa.shiftStartDateEntry.SetText(ctrl.Snldb.getShiftStartDate())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftStartDate_ShiftStartDatePicker	
+
+	//sa.guardNameEntry.SetText(ctrl.Snldb.getGuardName())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftInfo_GuardNameEntry
+
+	//sa.guardLicenceNumberEntry.SetText(ctrl.Snldb.getLicenseNumber())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftInfo_GuardLicenseNumberEntry
+
+	//sa.guardShiftCommentsEntry.SetText(ctrl.Snldb.getShiftComment())
+	//ctrl.Root.ObjectByName("")
+	//guardShiftInfo_ShiftCommentsEntry
+
+	//sa.setActiveCountLocation(ctrl.Snldb.getCountLocation())
+	//ctrl.Root.ObjectByName("")
+	//countingAtLocationSelector
+	//countingAtLocationSelector.model[countingAtLocationSelector.selectedIndex]
+
+	//sa.setActiveCountForItemType(ctrl.Snldb.getCountForItemType())
+	//ctrl.Root.ObjectByName("")
+	//countingTotalsForOptionSelector
+	//countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex]
+
+	//sa.SingleLabel.SetText(strconv.Itoa(ctrl.Snldb.getSingleAxleTotal()))
+        // go func() {
+	// 	ctrl.SingleAxleMessage = strconv.Itoa( ctrl.Snldb.getSingleAxleTotal() )
+	// 	qml.Changed(ctrl, &ctrl.SingleAxleMessage)
+        // }()
+
+	//sa.TandemLabel.SetText(strconv.Itoa(ctrl.Snldb.getTandemAxleTotal()))
+        // go func() {
+	// 	ctrl.TandemAxleMessage = strconv.Itoa( ctrl.Snldb.getTandemAxleTotal() )
+	// 	qml.Changed(ctrl, &ctrl.TandemAxleMessage)
+        // }()
+
+	//sa.TripleLabel.SetText(strconv.Itoa(ctrl.Snldb.getTripleAxleTotal()))
+        // go func() {
+	// 	ctrl.TripleAxleMessage = strconv.Itoa( ctrl.Snldb.getTripleAxleTotal() )
+	// 	qml.Changed(ctrl, &ctrl.TripleAxleMessage)
+        // }()
+
+	//sa.ComboLabel.SetText(strconv.Itoa(ctrl.Snldb.getComboTruckTotal()))
+        // go func() {
+	// 	ctrl.ComboAxleMessage = strconv.Itoa( ctrl.Snldb.getComboTruckTotal() )
+	// 	qml.Changed(ctrl, &ctrl.ComboAxleMessage)
+        // }()
+
+	//sa.SemiLabel.SetText(strconv.Itoa(ctrl.Snldb.getSemiTrailerTotal()))
+        // go func() {
+	// 	ctrl.SemiAxleMessage = strconv.Itoa( ctrl.Snldb.getSemiTrailerTotal() )
+	// 	qml.Changed(ctrl, &ctrl.SemiAxleMessage)
+        // }()
+
+	//disable all the fields after filling them/changing them while in loaded report mode.
+	//sa.shiftStartTimeEntry.SetSensitive(false)
+	//sa.shiftEndTimeEntry.SetSensitive(false)
+	//sa.shiftStartDateEntry.SetSensitive(false)
+	//sa.guardNameEntry.SetSensitive(false)
+	//sa.guardLicenceNumberEntry.SetSensitive(false)
+	//sa.guardShiftCommentsEntry.SetSensitive(false)
+	
+	//sa.conroyRadio.SetSensitive(false)
+	//sa.michaelRadio.SetSensitive(false)
+	//sa.strandherdRadio.SetSensitive(false)
+	//sa.innesRadio.SetSensitive(false)
+	//sa.clydeRadio.SetSensitive(false)
+	
+	//sa.passesRadio.SetSensitive(false)
+	//sa.ticketsRadio.SetSensitive(false)
+	
+	//sa.singleaxlebutton.SetSensitive(false)
+	//sa.tandemaxlebutton.SetSensitive(false)
+	//sa.tripleaxlebutton.SetSensitive(false)
+	//sa.combotruckbutton.SetSensitive(false)
+	//sa.semitrailerbutton.SetSensitive(false)
 }
 
 func (ctrl *Control) generateUniqueReportFilename() string {

@@ -23,7 +23,7 @@ Tab {
             Label {
                 objectName: "TruckType_SingleAxleLabel"
 		id: truckType_SingleAxleLabel
-                text: ctrl.singleAxleMessage //i18n.tr("0")
+                text: ctrl.singleAxleMessage 
             }
             Button {//row 2
                 objectName: "TruckType_TandemAxleButton"
@@ -36,7 +36,7 @@ Tab {
             Label {
                 objectName: "TruckType_TandemAxleLabel"
 		id: truckType_TandemAxleLabel
-                text: ctrl.tandemAxleMessage //i18n.tr("0")
+                text: ctrl.tandemAxleMessage 
             }            
             Button {//row 3
                 objectName: "TruckType_TripleAxleButton"
@@ -49,7 +49,7 @@ Tab {
             Label {
                 objectName: "TruckType_TripleAxleLabel"
 		id: truckType_TripleAxleLabel
-                text: ctrl.tripleAxleMessage //i18n.tr("0")
+                text: ctrl.tripleAxleMessage 
             }            
             Button {//row 4
                 objectName: "TruckType_ComboAxleButton"
@@ -62,7 +62,7 @@ Tab {
             Label {
                 objectName: "TruckType_ComboAxleLabel"
 		id: truckType_ComboAxleLabel
-                text: ctrl.comboAxleMessage //i18n.tr("0")
+                text: ctrl.comboAxleMessage 
             }            
             Button {//row 5
                 objectName: "TruckType_SemiAxleButton"
@@ -75,7 +75,7 @@ Tab {
             Label {
                 objectName: "TruckType_SemiAxleLabel"
 		id: truckType_SemiAxleLabel
-                text: ctrl.semiAxleMessage //i18n.tr("0")
+                text: ctrl.semiAxleMessage 
             }
             Button {//row 6
                 objectName: "TruckType_PrevButton"
