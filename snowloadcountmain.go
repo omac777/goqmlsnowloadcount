@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"bytes"
+	"strings"
 )
 
 const SHIFTSTARTTIME = string("shiftstarttime")
@@ -351,11 +352,14 @@ func (ctrl *Control) OpenReportOpenReportButtonClickedGo(theQmlObject qml.Object
         fmt.Println("in OpenReportOpenReportButtonClickedGo:")
 	//openReport_FileNameEntry
 	filename_ := theQmlObject.String("text")
+	filename_ = "snowloadcount20140425T094420.905286751.json"
+        fmt.Println("filenameentry:", filename_ )
 	ctrl.Snldb = ctrl.readJsonFileSNLDB(filename_)
+	ctrl.Snldb.debugDataFields()
 	ctrl.IsLoadedReport = true
 	ctrl.LoadedReportFilename = filename_
 	go func() {
-		ctrl.loadReportDataIntoGui()
+	 	ctrl.loadReportDataIntoGui()
 	}()
 }
 
@@ -503,65 +507,78 @@ func (ctrl *Control) loadReportDataIntoGui() {
         //4)get the objectinstance "xAnim", then call its function named "start"
 	//emitter.ObjectByName("xAnim").Call("start")
 
-	//sa.shiftStartTimeEntry.SetText(ctrl.Snldb.getShiftStartTime())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftStartTime_ShiftStartTimePicker
+        go func() {
+		myStartTimeParts := strings.Split(ctrl.Snldb.getShiftStartTime(), ":") 
+		myHourPart, _ := strconv.Atoi(myStartTimeParts[0])
+		myMinutePart, _ := strconv.Atoi(myStartTimeParts[1])
+		mySecondPart, _ := strconv.Atoi(myStartTimeParts[2])
+		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("hour", myHourPart )
+		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("minute", myMinutePart )
+		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("second", mySecondPart )
+	}()
+	
+	// go func() {
+	// 	myEndTimeParts := strings.Split(ctrl.Snldb.getShiftEndTime(), ":")
+	// 	myHourPart, _ := strconv.Atoi(myEndTimeParts[0])
+	// 	myMinutePart, _ := strconv.Atoi(myEndTimeParts[1])
+	// 	mySecondPart, _ := strconv.Atoi(myEndTimeParts[2])
+	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("hour", myHourPart)
+	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("minute", myMinutePart)
+	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("second", mySecondPart)
+	// }()
 
-	//sa.shiftEndTimeEntry.SetText(ctrl.Snldb.getShiftEndTime())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftEndTime_ShiftEndTimePicker
+	// go func() {
+	// 	myDateParts := strings.Split(ctrl.Snldb.getShiftStartDate(), "-")
+	// 	myYearPart, _ := strconv.Atoi(myDateParts[2])
+	// 	myMonthPart, _ := strconv.Atoi(myDateParts[1])
+	// 	myDayPart, _ := strconv.Atoi(myDateParts[0])
+	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("year", myYearPart)			
+	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("month", myMonthPart)			
+	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("day", myDayPart)			
+	// }()
 
-	//sa.shiftStartDateEntry.SetText(ctrl.Snldb.getShiftStartDate())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftStartDate_ShiftStartDatePicker	
+	// go func() {
+	// 	ctrl.Root.ObjectByName("guardShiftInfo_GuardNameEntry").Set("text", ctrl.Snldb.getGuardName())	
+	// }()
 
-	//sa.guardNameEntry.SetText(ctrl.Snldb.getGuardName())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftInfo_GuardNameEntry
+	// go func() {
+	// 	ctrl.Root.ObjectByName("guardShiftInfo_GuardLicenseNumberEntry").Set("text", ctrl.Snldb.getLicenseNumber())	
+	// }()
 
-	//sa.guardLicenceNumberEntry.SetText(ctrl.Snldb.getLicenseNumber())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftInfo_GuardLicenseNumberEntry
+	// go func() {
+	// 	ctrl.Root.ObjectByName("guardShiftInfo_ShiftCommentsEntry").Set("text", ctrl.Snldb.getShiftComment()) 	
+	// }()
 
-	//sa.guardShiftCommentsEntry.SetText(ctrl.Snldb.getShiftComment())
-	//ctrl.Root.ObjectByName("")
-	//guardShiftInfo_ShiftCommentsEntry
+	// //sa.setActiveCountLocation(ctrl.Snldb.getCountLocation())
+	// //ctrl.Root.ObjectByName("")
+	// //countingAtLocationSelector
+	// //countingAtLocationSelector.model[countingAtLocationSelector.selectedIndex]
 
-	//sa.setActiveCountLocation(ctrl.Snldb.getCountLocation())
-	//ctrl.Root.ObjectByName("")
-	//countingAtLocationSelector
-	//countingAtLocationSelector.model[countingAtLocationSelector.selectedIndex]
+	// //sa.setActiveCountForItemType(ctrl.Snldb.getCountForItemType())
+	// //ctrl.Root.ObjectByName("")
+	// //countingTotalsForOptionSelector
+	// //countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex]
 
-	//sa.setActiveCountForItemType(ctrl.Snldb.getCountForItemType())
-	//ctrl.Root.ObjectByName("")
-	//countingTotalsForOptionSelector
-	//countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex]
-
-	//sa.SingleLabel.SetText(strconv.Itoa(ctrl.Snldb.getSingleAxleTotal()))
         // go func() {
 	// 	ctrl.SingleAxleMessage = strconv.Itoa( ctrl.Snldb.getSingleAxleTotal() )
 	// 	qml.Changed(ctrl, &ctrl.SingleAxleMessage)
         // }()
 
-	//sa.TandemLabel.SetText(strconv.Itoa(ctrl.Snldb.getTandemAxleTotal()))
         // go func() {
 	// 	ctrl.TandemAxleMessage = strconv.Itoa( ctrl.Snldb.getTandemAxleTotal() )
 	// 	qml.Changed(ctrl, &ctrl.TandemAxleMessage)
         // }()
 
-	//sa.TripleLabel.SetText(strconv.Itoa(ctrl.Snldb.getTripleAxleTotal()))
         // go func() {
 	// 	ctrl.TripleAxleMessage = strconv.Itoa( ctrl.Snldb.getTripleAxleTotal() )
 	// 	qml.Changed(ctrl, &ctrl.TripleAxleMessage)
         // }()
 
-	//sa.ComboLabel.SetText(strconv.Itoa(ctrl.Snldb.getComboTruckTotal()))
         // go func() {
 	// 	ctrl.ComboAxleMessage = strconv.Itoa( ctrl.Snldb.getComboTruckTotal() )
 	// 	qml.Changed(ctrl, &ctrl.ComboAxleMessage)
         // }()
 
-	//sa.SemiLabel.SetText(strconv.Itoa(ctrl.Snldb.getSemiTrailerTotal()))
         // go func() {
 	// 	ctrl.SemiAxleMessage = strconv.Itoa( ctrl.Snldb.getSemiTrailerTotal() )
 	// 	qml.Changed(ctrl, &ctrl.SemiAxleMessage)
