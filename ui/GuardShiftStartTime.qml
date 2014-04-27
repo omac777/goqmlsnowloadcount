@@ -23,6 +23,7 @@ Tab {
                 id: guardShiftStartTime_ShiftStartTimePicker
                 mode: "Hours|Minutes|Seconds"
                 width: parent.width
+		date: new Date(ctrl.startTimeMessage)
             }
 
 	    //function setGuardShiftStartTime(hour_, minute_, second_) {

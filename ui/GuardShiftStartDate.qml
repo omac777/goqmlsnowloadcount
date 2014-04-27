@@ -24,7 +24,9 @@ Tab {
             DatePicker {
                 id: guardShiftStartDate_ShiftStartDatePicker
                 mode: "Years|Months|Days"
-                width: parent.width
+                width: parent.width		
+		//date: new Date(ctrl.startDateMessage)
+
             }
 
 	    function setGuardShiftStartDateToToday() {

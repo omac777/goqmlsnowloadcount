@@ -22,6 +22,7 @@ Tab {
                 id: guardShiftEndTime_ShiftEndTimePicker
                 mode: "Hours|Minutes|Seconds"
                 width: parent.width
+		date: new Date(ctrl.endTimeMessage)
             }
         }
 

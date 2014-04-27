@@ -277,6 +277,12 @@ func run() error {
         ctrl := Control{
 		Messagetf1:"tf1inithey",
 		Messagebt1:"bt1inithey",
+		// StartTimeMessage: time.Now().String(),
+		// EndTimeMessage: time.Now().String(),
+		// StartDateMessage: time.Now().String(),
+		StartTimeMessage: "",
+		EndTimeMessage: "",
+		//StartDateMessage: "",
 		SingleAxleMessage:"0",
 		TandemAxleMessage:"0",
 		TripleAxleMessage:"0",
@@ -298,6 +304,9 @@ type Control struct {
         Root    qml.Object
         Messagebt1 string
         Messagetf1 string
+	StartTimeMessage string
+	EndTimeMessage string
+	//StartDateMessage string
 	SingleAxleMessage string
 	TandemAxleMessage string
 	TripleAxleMessage string
@@ -352,7 +361,7 @@ func (ctrl *Control) OpenReportOpenReportButtonClickedGo(theQmlObject qml.Object
         fmt.Println("in OpenReportOpenReportButtonClickedGo:")
 	//openReport_FileNameEntry
 	filename_ := theQmlObject.String("text")
-	filename_ = "snowloadcount20140425T094420.905286751.json"
+	//filename_ = "snowloadcount20140425T094420.905286751.json"
         fmt.Println("filenameentry:", filename_ )
 	ctrl.Snldb = ctrl.readJsonFileSNLDB(filename_)
 	ctrl.Snldb.debugDataFields()
@@ -517,11 +526,14 @@ func (ctrl *Control) loadReportDataIntoGui() {
 		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("hours", myHourPart )
 		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("minutes", myMinutePart )
 		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("seconds", mySecondPart )
-		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("date", time.Now().String() )		
+		
+		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("date", time.Now().String() )		
 		fmt.Println("set date: time.Now().String() works:", time.Now().String() )
+		ctrl.StartTimeMessage = time.Now().String()
+		qml.Changed(ctrl, &ctrl.StartTimeMessage)
 	}()
 	
-	// go func() {
+	go func() {
 	// 	myEndTimeParts := strings.Split(ctrl.Snldb.getShiftEndTime(), ":")
 	// 	myHourPart, _ := strconv.Atoi(myEndTimeParts[0])
 	// 	myMinutePart, _ := strconv.Atoi(myEndTimeParts[1])
@@ -529,29 +541,33 @@ func (ctrl *Control) loadReportDataIntoGui() {
 	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("hour", myHourPart)
 	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("minute", myMinutePart)
 	// 	ctrl.Root.ObjectByName("guardShiftEndTime_ShiftEndTimePicker").Set("second", mySecondPart)
-	// }()
+		ctrl.EndTimeMessage = time.Now().String()
+		qml.Changed(ctrl, &ctrl.EndTimeMessage)
+	}()
 
 	// go func() {
-	// 	myDateParts := strings.Split(ctrl.Snldb.getShiftStartDate(), "-")
-	// 	myYearPart, _ := strconv.Atoi(myDateParts[2])
-	// 	myMonthPart, _ := strconv.Atoi(myDateParts[1])
-	// 	myDayPart, _ := strconv.Atoi(myDateParts[0])
-	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("year", myYearPart)			
-	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("month", myMonthPart)			
-	// 	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("day", myDayPart)			
-	// }()
+	//  	myDateParts := strings.Split(ctrl.Snldb.getShiftStartDate(), "-")
+	//  	myYearPart, _ := strconv.Atoi(myDateParts[2])
+	//  	myMonthPart, _ := strconv.Atoi(myDateParts[1])
+	//  	myDayPart, _ := strconv.Atoi(myDateParts[0])
+	//  	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("year", myYearPart)			
+	//  	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("month", myMonthPart)			
+	//  	ctrl.Root.ObjectByName("guardShiftStartDate_ShiftStartDatePicker").Set("day", myDayPart)
+	//ctrl.StartDateMessage = time.Now().String()
+	//qml.Changed(ctrl, &ctrl.StartDateMessage)			
+	//}()
 
-	// go func() {
-	// 	ctrl.Root.ObjectByName("guardShiftInfo_GuardNameEntry").Set("text", ctrl.Snldb.getGuardName())	
-	// }()
+	go func() {
+	 	ctrl.Root.ObjectByName("guardShiftInfo_GuardNameEntry").Set("text", ctrl.Snldb.getGuardName())	
+	}()
 
-	// go func() {
-	// 	ctrl.Root.ObjectByName("guardShiftInfo_GuardLicenseNumberEntry").Set("text", ctrl.Snldb.getLicenseNumber())	
-	// }()
+	go func() {
+	 	ctrl.Root.ObjectByName("guardShiftInfo_GuardLicenseNumberEntry").Set("text", ctrl.Snldb.getLicenseNumber())	
+	}()
 
-	// go func() {
-	// 	ctrl.Root.ObjectByName("guardShiftInfo_ShiftCommentsEntry").Set("text", ctrl.Snldb.getShiftComment()) 	
-	// }()
+	go func() {
+	 	ctrl.Root.ObjectByName("guardShiftInfo_ShiftCommentsEntry").Set("text", ctrl.Snldb.getShiftComment()) 	
+	}()
 
 	// //sa.setActiveCountLocation(ctrl.Snldb.getCountLocation())
 	// //ctrl.Root.ObjectByName("")
@@ -563,30 +579,30 @@ func (ctrl *Control) loadReportDataIntoGui() {
 	// //countingTotalsForOptionSelector
 	// //countingTotalsForOptionSelector.model[countingTotalsForOptionSelector.selectedIndex]
 
-        // go func() {
-	// 	ctrl.SingleAxleMessage = strconv.Itoa( ctrl.Snldb.getSingleAxleTotal() )
-	// 	qml.Changed(ctrl, &ctrl.SingleAxleMessage)
-        // }()
+        go func() {
+	 	ctrl.SingleAxleMessage = strconv.Itoa( ctrl.Snldb.getSingleAxleTotal() )
+	 	qml.Changed(ctrl, &ctrl.SingleAxleMessage)
+        }()
 
-        // go func() {
-	// 	ctrl.TandemAxleMessage = strconv.Itoa( ctrl.Snldb.getTandemAxleTotal() )
-	// 	qml.Changed(ctrl, &ctrl.TandemAxleMessage)
-        // }()
+        go func() {
+	 	ctrl.TandemAxleMessage = strconv.Itoa( ctrl.Snldb.getTandemAxleTotal() )
+		qml.Changed(ctrl, &ctrl.TandemAxleMessage)
+        }()
 
-        // go func() {
-	// 	ctrl.TripleAxleMessage = strconv.Itoa( ctrl.Snldb.getTripleAxleTotal() )
-	// 	qml.Changed(ctrl, &ctrl.TripleAxleMessage)
-        // }()
+        go func() {
+		ctrl.TripleAxleMessage = strconv.Itoa( ctrl.Snldb.getTripleAxleTotal() )
+		qml.Changed(ctrl, &ctrl.TripleAxleMessage)
+        }()
 
-        // go func() {
-	// 	ctrl.ComboAxleMessage = strconv.Itoa( ctrl.Snldb.getComboTruckTotal() )
-	// 	qml.Changed(ctrl, &ctrl.ComboAxleMessage)
-        // }()
+        go func() {
+		ctrl.ComboAxleMessage = strconv.Itoa( ctrl.Snldb.getComboTruckTotal() )
+		qml.Changed(ctrl, &ctrl.ComboAxleMessage)
+        }()
 
-        // go func() {
-	// 	ctrl.SemiAxleMessage = strconv.Itoa( ctrl.Snldb.getSemiTrailerTotal() )
-	// 	qml.Changed(ctrl, &ctrl.SemiAxleMessage)
-        // }()
+        go func() {
+		ctrl.SemiAxleMessage = strconv.Itoa( ctrl.Snldb.getSemiTrailerTotal() )
+		qml.Changed(ctrl, &ctrl.SemiAxleMessage)
+        }()
 
 	//disable all the fields after filling them/changing them while in loaded report mode.
 	//sa.shiftStartTimeEntry.SetSensitive(false)
