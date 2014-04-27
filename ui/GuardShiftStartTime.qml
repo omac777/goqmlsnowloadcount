@@ -19,17 +19,23 @@ Tab {
                 width: parent.width
             }
             DatePicker { //row2
+	    	objectName: "guardShiftStartTime_ShiftStartTimePicker"
                 id: guardShiftStartTime_ShiftStartTimePicker
                 mode: "Hours|Minutes|Seconds"
                 width: parent.width
             }
 
-	    function setGuardShiftStartTimeToNow() {
-	    	var d = new Date();
-	    	guardShiftStartDate_ShiftStartDatePicker.hour = d.hour();
-	    	guardShiftStartDate_ShiftStartDatePicker.minute = d.minute();
-	    	guardShiftStartDate_ShiftStartDatePicker.second = d.second();
-	    }
+	    //function setGuardShiftStartTime(hour_, minute_, second_) {
+		//var d = new Date();
+		//guardShiftStartTime_ShiftStartTimePicker.date = new Date(d.year, d.month - 1, d.day , hour_, minute_, second_)
+	    	//var d = new Date();
+	    	// guardShiftStartDate_ShiftStartDatePicker.hour = d.hour();
+	    	// guardShiftStartDate_ShiftStartDatePicker.minute = d.minute();
+	    	// guardShiftStartDate_ShiftStartDatePicker.second = d.second();
+		//var mylocale: Qt.locale()
+		//string mydateTimeString: "2013-09-17 10:56:06"
+		//var d = Date.fromLocaleString(mylocale, mydateTimeString, "yyyy-MM-dd hh:mm:ss")
+	    //}
         }
 
         Grid {

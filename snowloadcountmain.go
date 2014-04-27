@@ -12,7 +12,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"bytes"
-	"strings"
+	//"strings"
 )
 
 const SHIFTSTARTTIME = string("shiftstarttime")
@@ -508,13 +508,17 @@ func (ctrl *Control) loadReportDataIntoGui() {
 	//emitter.ObjectByName("xAnim").Call("start")
 
         go func() {
-		myStartTimeParts := strings.Split(ctrl.Snldb.getShiftStartTime(), ":") 
-		myHourPart, _ := strconv.Atoi(myStartTimeParts[0])
-		myMinutePart, _ := strconv.Atoi(myStartTimeParts[1])
-		mySecondPart, _ := strconv.Atoi(myStartTimeParts[2])
-		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("hour", myHourPart )
-		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("minute", myMinutePart )
-		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("second", mySecondPart )
+		//myStartTimeParts := strings.Split(ctrl.Snldb.getShiftStartTime(), ":") 
+		//fmt.Println("snldbstarttime:", ctrl.Snldb.getShiftStartTime() )
+		//myHourPart, _ := strconv.Atoi(myStartTimeParts[0])
+		//myMinutePart, _ := strconv.Atoi(myStartTimeParts[1])
+		//mySecondPart, _ := strconv.Atoi(myStartTimeParts[2])
+		//hours/minutes/seconds property is read-only.  We must reset the entire date.
+		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("hours", myHourPart )
+		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("minutes", myMinutePart )
+		//ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("seconds", mySecondPart )
+		ctrl.Root.ObjectByName("guardShiftStartTime_ShiftStartTimePicker").Set("date", time.Now().String() )		
+		fmt.Println("set date: time.Now().String() works:", time.Now().String() )
 	}()
 	
 	// go func() {
